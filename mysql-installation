@@ -1,0 +1,10 @@
+ apt-get update
+ sudo apt-get update
+ sudo apt-get install mysql-server
+ sudo systemctl status  mysql.service 
+ mysql root user secure 
+ sudo mysql_secure_installation 
+ change 127.0.0.1 to 0.0.0.0 in bind and mysqlx-bind-address and enable port number 3306
+ sudo vim /etc/mysql/mysql.conf.d/mysqld.cnf 
+ sudo systemctl restart mysql.service 
+ sudo mysql -u root -p

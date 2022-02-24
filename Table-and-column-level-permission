@@ -1,0 +1,54 @@
+Create the database
+
+CREATE DATABASE vijay;
+
+Create the table
+
+CREATE TABLE details (PersonID int, Name varchar(255));
+CREATE TABLE address (PersonID int, Name varchar(255),City varchar(255));
+
+Insert values those tables 
+
+INSERT INTO details (PersonID, Name) VALUES (01, 'vijay');
+
+select * from vijay.details;
+
+INSERT INTO address (PersonID, Name, City) VALUES (01, 'vijay','chennai');
+
+select * from vijay.address;
+
+
+Create user for loacl and remote access
+
+CREATE USER 'vijay'@'localhost' IDENTIFIED BY 'Vijay@12';
+
+CREATE USER 'vijay'@'%' IDENTIFIED BY 'Vijay@12';
+
+===================================================================
+
+Table Level permission
+
+GRANT SELECT, INSERT, UPDATE, DELETE ON vijay.details TO vijay@'localhost';
+
+GRANT SELECT, INSERT, UPDATE, DELETE ON vijay.details TO vijay@'%';
+
+select * from vijay.details;
+
+select * from vijay.address; ## This no having permission
+ERROR 1143 (42000): SELECT command denied to user 'vijay'@'localhost' for column 'PersonID' in table 'address'
+========================================================================================================================================
+
+Column level permission
+
+GRANT SELECT (col1), INSERT (col1,col2) ON mydb.mytbl TO 'someuser'@'somehost';
+
+Only grant city column of vijay user on address table vijay db
+
+GRANT SELECT (City) ON vijay.address TO vijay@'%';
+GRANT SELECT (City) ON vijay.address TO vijay@'localhost';
+
+Verfiy
+select City from vijay.address;
+
+select * from vijay.address;
+ERROR 1143 (42000): SELECT command denied to user 'vijay'@'localhost' for column 'PersonID' in table 'address'
